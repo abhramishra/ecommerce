@@ -1,0 +1,22 @@
+<%= form_for @category do |c| %>
+	<% if @category.errors.any? %>
+		<h2>Error messages</h2>
+		<ul>
+		<% @category.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	<% end %>
+
+	<label for="category_name">Category name : </label><br>
+	<%= c.text_field :name %><span id="nameMsgHandle"></span>
+	<%= c.submit %>
+
+<% end %>
+
+<script type="text/javascript">
+	nameMsg = document.getElementById("category_name")
+	nameMsgHandle = document.getElementById("nameMsgHandle")
+	
+
+</script>

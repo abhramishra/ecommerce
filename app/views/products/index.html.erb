@@ -1,0 +1,13 @@
+<h1>Listing products (Number of products - <%= @products.length %>)</h1>
+<% if @products.empty? %>
+	<p>No record found</p>
+<% else %>
+	<ol>
+	<% @products.each do |p| %>
+		<li><%= link_to p.name,product_path(p.id) %> INR- <%=p.price%> Category_id - <%=Category.find(p.category_id).name%> - <%= link_to "view", product_path(p.id) %> </li>
+		<hr>
+	<% end %>
+	</ol>
+<% end %>
+
+<%= link_to "Add Product",new_product_path %>

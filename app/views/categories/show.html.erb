@@ -1,0 +1,7 @@
+<h1>Category list</h1>
+<br>
+<%= link_to "Edit",edit_category_path(@category.id)  %>
+<table border="1">
+<tr><td><%= @category.name %></td></tr>
+</table>
+<%= link_to "Delete",category_path(@category.id),method: :delete,data: {confirm: "Are you sure?"} %>

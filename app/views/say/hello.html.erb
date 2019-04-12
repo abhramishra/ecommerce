@@ -1,0 +1,33 @@
+<h1>Say#hello</h1>
+<p>Find me in app/views/say/hello.html.erb</p>
+
+<a href="/test/index">go to test controller</a>
+
+<% fruits = ["apple","banana","mango","pineapple"] %>
+
+<ul>
+		<h2>Fruits (<%= fruits.length %>)</h2>
+		<li>Apple</li>
+		<li>Banana</li>
+		<li>Mango</li>
+		<li>Pineapple</li>
+</ul>
+
+
+
+<% if fruits.empty? %>
+	<h2>No fruits found</h2>
+<% else %>
+
+
+	
+
+	<ol>
+		<h2>Fruits (<%= fruits.length %>)</h2>
+		<% fruits.each do |fruit| %>
+			<li><%= fruit.upcase %></li>
+		<% end %>
+	</ol>
+<% end %>
+
+

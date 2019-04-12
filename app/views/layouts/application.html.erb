@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ecommerce</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!--<a href ="/categories">List Categories</a> | <a href ="/products">List Products</a> -->
+
+    <%= link_to "Category List", categories_path %> |
+    <%= link_to "Product List", products_path %>
+    <br>
+    <%= notice %>
+    
+    <%= yield %> 
+  </body>
+</html>

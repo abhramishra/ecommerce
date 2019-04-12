@@ -1,0 +1,13 @@
+<table border = "1">
+<tr>
+<td>
+<center>
+<p><%= link_to "edit",edit_product_path(@product.id) %> | <%= link_to "destroy", product_path(@product.id), method: :delete, data: {confirm: "Are you sure?"} %></p>
+<h1><%= @product.name %></h1>
+<p><b>Description : </b><%= @product.description %></p>
+<p><b>Price : </b><%= @product.price %></p>
+<p><b>Category : <%= Category.find(@product.category_id).name %></b></p>
+<%= link_to "List Product",products_path %>
+</center>
+</tr>
+</table>
