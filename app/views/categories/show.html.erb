@@ -1,7 +1,26 @@
-<h1>Category list</h1>
-<br>
-<%= link_to "Edit",edit_category_path(@category.id)  %>
-<table border="1">
-<tr><td><%= @category.name %></td></tr>
+
+
+
+<table border = "1">
+<tr>
+
+<center>
+<% if (user_signed_in?) && (can? :update,@category) %>
+	<p><%= link_to "edit",edit_product_path(@category.id) %> | <%= link_to "destroy", product_path(@category.id), method: :delete, data: {confirm: "Are you sure?"} %></p>
+<% end %>
+<% @product.each do |product| %>
+	<td>
+	<center><h1><%= product.name %></h1>
+	<p><%= image_tag(product.image_url.url) if product.image_url %> </p>
+
+	<p><b>Description : </b><%= product.description %></p>
+	<p><b>Price : </b><%= product.price %></p>
+	<p><b>Category : <%= Category.find(product.category_id).name %></b></p>
+	<%= link_to "List Product",products_path %>
+	</center>
+	</td>
+<% end %>
+</center>
+
+</tr>
 </table>
-<%= link_to "Delete",category_path(@category.id),method: :delete,data: {confirm: "Are you sure?"} %>

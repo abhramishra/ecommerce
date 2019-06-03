@@ -1,0 +1,53 @@
+<h2>Your cart</h2>
+<% if @cart_line_items.empty? %>
+	<p>Your cart is empty</p>
+<% else %>
+	<table border="2">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+			
+		<tbody>
+			<% sum = 0 %>
+			<% @cart_line_items.each_with_index do |cart_line_item,index| %>
+				<tr>
+					<td><%= index + 1 %></td>
+	                <td><%= image_tag(cart_line_item.product.image_url.url, size: "100*80") %></td>   
+					
+					<td><%= cart_line_item.product.name %></td>
+					<td><%= cart_line_item.product.price %></td>
+					<td><%= cart_line_item.quantity %></td>
+					<td><%= cart_line_item.product.price * cart_line_item.quantity %></td>
+
+				</tr>
+				<% sum += cart_line_item.product.price * cart_line_item.quantity %>
+				
+			<% end %>
+			<tr>
+				<td colspan="5"><center><h3>Total : </h3></center></td>
+				<td><%= sum %></td>
+			</tr>
+		</tbody>
+
+	</table>
+<% end %>
+<br>
+<h3>Checkout</h3>
+<%= form_for Order.new do |f| %>
+	<h5>Select Adress</h5>
+	<ol>
+		<% current_user.addresses.each do |address| %>
+			<li><label for = "address_id"><%= address.name %></label>
+			<%= f.radio_button :address_id,address.id %>
+		    , <%= address.details %> - <%= address.street %> , <%= address.city %> - <%= address.pincode %></li><br>
+		<% end %>
+	</ol>
+	<%= f.submit "checkout" %>
+<% end %>

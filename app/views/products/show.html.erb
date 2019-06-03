@@ -2,12 +2,71 @@
 <tr>
 <td>
 <center>
-<p><%= link_to "edit",edit_product_path(@product.id) %> | <%= link_to "destroy", product_path(@product.id), method: :delete, data: {confirm: "Are you sure?"} %></p>
+
+<% if (user_signed_in?) && (can? :update,@product) %>
+	<p><%= link_to "edit",edit_product_path(@product.id) %> | <%= link_to "destroy", product_path(@product.id), method: :delete, data: {confirm: "Are you sure?"} %></p>
+<% end %>
+
 <h1><%= @product.name %></h1>
+<p><%= image_tag(@product.image_url.url) if @product.image_url %> </p>
+
 <p><b>Description : </b><%= @product.description %></p>
 <p><b>Price : </b><%= @product.price %></p>
 <p><b>Category : <%= Category.find(@product.category_id).name %></b></p>
+
+
 <%= link_to "List Product",products_path %>
 </center>
+</td>
 </tr>
 </table>
+
+<!-- Add to cart functionality -->
+<h3>Add to cart</h3>
+<% if user_signed_in? %>
+	<%= form_for CartLineItem.new do |f| %>
+		<label>Quantity : </label>
+		<%= f.select :quantity, (1..10).to_a %><br>
+		<%= f.hidden_field :product_id, value:@product.id %>
+		<%= f.submit "Add" %>
+
+	<% end %>
+<% else %>
+	<p>You need to login before adding any item in your cart</p>
+<% end %>
+
+<h3>Listing Review</h3>
+<% if @product.reviews.empty? %>
+	<p>No review found. </p>
+<% else %>
+	<ol>
+	<% @product.reviews.each do |reviews| %>
+		<li><%= reviews.body %> 
+			<% if user_signed_in? %>
+				<%= link_to "destroy",review_path(reviews.id), method: :delete,data: {confirm: "Are you sure?"} %></li>
+			<% end %>
+	<% end %>
+	</ol>
+<% end %>
+
+
+<h4>Add your Review</h4><br>
+<%= form_for @review do |r| %>
+	
+	<label for="review_body">Description : </label>
+	<%= r.text_field :body %><br>
+	<%= r.hidden_field :product_id, value: @product.id %>
+
+	<label>Rating</label><br>
+	<h4>
+	<%= r.radio_button :rating, 1 %> *
+	<%= r.radio_button :rating, 2 %> **
+	<%= r.radio_button :rating, 3 %> ***
+	<%= r.radio_button :rating, 4 %> ****
+	<%= r.radio_button :rating, 5 %> *****
+	</h4><br>
+	<%= r.submit %>
+
+<% end %>
+
+

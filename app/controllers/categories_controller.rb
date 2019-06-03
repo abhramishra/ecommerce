@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
 	
+	before_action :authenticate_user!,except:[:index,:show]
+	load_and_authorize_resource
 	# path - categories_path
 	def index
 		@categories = Category.all
@@ -25,6 +27,8 @@ class CategoriesController < ApplicationController
 	# path - category_path(id) 
 	def show 
 		@category = Category.find(params[:id])
+		@product = @category.products
+		#@products = Product.find(params[:id])
 	end
 
 	# path - edit_category_path(id)
@@ -52,6 +56,6 @@ class CategoriesController < ApplicationController
 	private
 
 	def category_params
-		params[:category].permit(:name)
+		params[:category].permit(:name,:description)
 	end
 end

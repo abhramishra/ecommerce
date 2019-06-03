@@ -2,6 +2,24 @@
 <html>
   <head>
     <title>Ecommerce</title>
+    <style>
+      .footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: black;
+        color: white;
+        text-align: center;
+      }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,12 +29,44 @@
 
   <body>
     <!--<a href ="/categories">List Categories</a> | <a href ="/products">List Products</a> -->
+    <div class="navbar navbar-inverse">
+      <div class="container-fluid">
+        
+          <% if user_signed_in? %>
+             
+            <%= link_to "Your cart (#{current_user.cart_line_items.pluck(:quantity).inject(:+)})",cart_line_items_path, class: "navbar-brand" %>
 
-    <%= link_to "Category List", categories_path %> |
-    <%= link_to "Product List", products_path %>
+            <%= link_to "Address",addresses_path, class: "navbar-brand" %>
+
+            <%= link_to "Account Setting", edit_user_registration_path, class: "navbar-brand" %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"nav navbar-nav navbar-right navbar-brand" %> ||
+          <% else %>
+        
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to " Register", new_user_registration_path, class:"glyphicon glyphicon-user" %></li>
+              <li><%= link_to " Sign in", new_user_session_path, class:"glyphicon glyphicon-log-in" %></li>
+            </ul>
+          <% end %>
+
+          <%= link_to "Category List", categories_path, class:"navbar-brand" %> ||
+          <%= link_to "Product List", products_path, class: "navbar-brand" %>
+          
+      </div>
+      
+    </div>
     <br>
-    <%= notice %>
     
+    <%= notice %>
+
     <%= yield %> 
+
+    <div class="footer">
+      <p>Footer</p>
+    </div>
+
+
+
+  
+
   </body>
 </html>

@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 	
+	before_action :authenticate_user!,except: [:index,:show]
+	load_and_authorize_resource
 	# path - products_path
 	# url - localhost:3000/products
 	# uri - /products
@@ -40,6 +42,8 @@ class ProductsController < ApplicationController
 	# roles & resposnsibility - to find the product from the database and display it on the show page, this page will be used to show all the data about a product and also associated information like all reviews, all q&a's, add product to cart
 	def show
 		@product = Product.find(params[:id]) 
+		@review = Review.new
+		
 	end
 
 	# path - edit_product_path(id)

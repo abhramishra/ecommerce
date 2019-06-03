@@ -26,10 +26,10 @@
 	<label for="product_stock">Stock :</label><br>
 	<%= f.number_field :stock %><br><br>
 
-	<%= f.check_box :cod_eligible %> <label for="cod_eligible_product">COD Eligible</label>
+	<%= f.check_box :cod_eligible %> <label for="cod_eligible_product">COD Eligible</label><br>
 
-	<label for="product_image_url">Image URL : </label><br>
-	<%= f.text_field :image_url %><br>
+	<label for="product_image_url">Image : </label><br>
+	<%= f.file_field :image_url %><br>
 
 
 	<%= f.submit %>

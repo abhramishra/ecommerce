@@ -9,7 +9,10 @@
 	<% end %>
 
 	<label for="category_name">Category name : </label><br>
-	<%= c.text_field :name %><span id="nameMsgHandle"></span>
+	<%= c.text_field :name %><span id="nameMsgHandle"></span><br>
+
+	<label for="category_description">Description : </label><br>
+	<%= c.text_area :description %><br>
 	<%= c.submit %>
 
 <% end %>

@@ -1,0 +1,31 @@
+<h2>Your Order</h2>
+<!--<table>
+	<thead>
+		<tr>
+			<th>Order id</th>
+			<th>Order Date</th>
+			<th>Total</th>
+		</tr>
+	</thead>
+
+		<tr>
+			
+		</tr>
+	<tbody>
+		
+	</tbody>
+</table> -->
+
+<% current_user.orders.each do |order| %>
+	<h4>Order Id : <%= order.order_number %></h4>
+	<p>INR - <%= order.total %> <br>
+	<lable>Order date : </lable><%= order.order_date %>
+	<ol>
+		<% order.order_line_items.each do |line_item| %>
+			<li>
+				<%= line_item.product.name %> - INR <%= line_item.price %> - <b>Quantity : </b><%= line_item.quantity %>
+			</li>
+		<% end %>
+	</ol> 
+	<hr>
+<% end %>

@@ -10,4 +10,6 @@
 	</ol>
 <% end %>
 
-<%= link_to "Add Product",new_product_path %>
+<% if (user_signed_in?) && (can? :create,Product.new) %>
+	<%= link_to "Add Product",new_product_path %>
+<% end %>
