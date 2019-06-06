@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :products #routes for index, new
   get 'say/hello'
   get 'test/index'
-  root 'say#hello'
+  root 'say#home'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
